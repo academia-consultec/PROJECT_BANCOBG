@@ -2,7 +2,7 @@ package com.consultec.org.banktest.modelo;
 
 import java.io.Serializable;
 
-public class ClienteDTO implements Serializable {
+public class ClienteDTO extends ResponseDTO {
     private Long id;
     private String nombre;
     private String apellido;
@@ -14,22 +14,6 @@ public class ClienteDTO implements Serializable {
     private String telefono;
     private String email;
     private String estado;
-
-    public ClienteDTO(Long id, String nombre, String apellido, String tipo_documento,
-                      Integer id_documento, Integer edad, String sexo, String direccion,
-                      String telefono, String email, String estado) {
-        this.id = id;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.tipo_documento = tipo_documento;
-        this.id_documento = id_documento;
-        this.edad = edad;
-        this.sexo = sexo;
-        this.direccion = direccion;
-        this.telefono = telefono;
-        this.email = email;
-        this.estado = estado;
-    }
 
     public ClienteDTO() { }
 
