@@ -1,7 +1,6 @@
 package com.consultec.org.banktest.services;
 
-import com.consultec.org.banktest.exceptions.HTTPErrorCodeException;
-import com.consultec.org.banktest.exceptions.NotFoundErrorException;
+import com.consultec.org.banktest.exceptions.ServiceException;
 import com.consultec.org.banktest.modelo.ClienteDTO;
 import com.consultec.org.banktest.repository.IClienteRepository;
 import com.consultec.org.banktest.repository.entity.ClienteEntity;
@@ -34,7 +33,7 @@ public class ClienteServiceImple implements IClienteService {
         if(!clienteEntity.isEmpty()){
             return ClienteMap.mapCliente(clienteEntity.get());
         }else{
-            throw new NotFoundErrorException(NotFoundErrorException.ListErrorCode.NOTFOUND, "Cliente No encontrado");
+            throw new ServiceException(ServiceException.ListErrorCode.NOTFOUND, "Cliente No encontrado");
         }
 
     }

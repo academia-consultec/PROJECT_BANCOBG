@@ -1,9 +1,7 @@
 package com.consultec.org.banktest.controllers.custommessage;
 
-import com.consultec.org.banktest.exceptions.HTTPErrorCodeException;
-import com.consultec.org.banktest.exceptions.NotFoundErrorException;
+import com.consultec.org.banktest.exceptions.ServiceException;
 import com.consultec.org.banktest.modelo.ErrorDTO;
-import com.consultec.org.banktest.modelo.ResponseDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -38,16 +36,24 @@ public class ControllerExceptionHandler {
 
 
 
-    @ExceptionHandler(NotFoundErrorException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(ServiceException.class)
     @ResponseBody
-    public final ResponseEntity NotFoundhandleAllExceptions(NotFoundErrorException ex) {
-        return ResponseEntity
-                .status(HttpStatus.NOT_FOUND)
-                .body(
-                        new ErrorDTO(ex.getErrorCode().getIntCode(), ex.getMessage())
-                );
+    public final ResponseEntity HTTPErrorCodeException(ServiceException ex) {
+        switch (ex.getErrorCode()){
+            case NOTFOUND -> {
+                return ResponseEntity
+                        .status(HttpStatus.NOT_FOUND)
+                        .body(
+                                new ErrorDTO(ex.getErrorCode().getIntCode(), ex.getMessage())
+                        );
+            }
+            default -> {
+                return ResponseEntity
+                        .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body(
+                                new ErrorDTO(500, "Error interno: " + ex.getMessage())
+                        );
+            }
+        }
     }
-
-
 }

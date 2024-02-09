@@ -1,6 +1,6 @@
 package com.consultec.org.banktest.exceptions;
 
-public class HTTPErrorCodeException extends RuntimeException{
+public class ServiceException extends RuntimeException{
 
     public enum ListErrorCode {
         NOTFOUND(404);
@@ -16,7 +16,7 @@ public class HTTPErrorCodeException extends RuntimeException{
     };
 
     private ListErrorCode listErrorCode;
-    public HTTPErrorCodeException(ListErrorCode code, String message) {
+    public ServiceException(ListErrorCode code, String message) {
         super(message);
         this.listErrorCode = code;
     }
